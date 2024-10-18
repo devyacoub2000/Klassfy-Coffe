@@ -18,6 +18,13 @@ class FrontController extends Controller
      return view('front.index', compact('times', 'chefs', 'data'));
    }
 
+   public function dashboard() {
+     $times = Time::latest('id')->get(); 
+     $chefs = Chef::latest('id')->paginate(3); 
+     $data =  Food::latest('id')->paginate(6); 
+     return view('dashboard',  compact('times', 'chefs', 'data'));
+   }
+
    public function store(Request $request) {
       $request->validate([
             'name' => 'required',

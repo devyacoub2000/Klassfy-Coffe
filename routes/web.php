@@ -9,10 +9,13 @@ Route::get('/', [FrontController::class, 'index']);
 
 Route::post('store', [FrontController::class, 'store'])->name('front.store');
 
+Route::get('/index', [FrontController::class, 'dashboard'])
+->middleware(['auth', 'verified'])
+->name('front.dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/index', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {

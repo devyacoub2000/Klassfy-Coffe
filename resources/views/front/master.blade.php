@@ -76,6 +76,18 @@ https://templatemo.com/tm-558-klassy-cafe
                            
                             <!-- <li class=""><a rel="sponsored" href="https://templatemo.com" target="_blank">External URL</a></li> -->
                             <li class="scroll-to-section"><a href="#reservation">Contact Us</a></li> 
+                            @guest
+                            <li class="scroll-to-section"><a href="{{route('login')}}">Login</a></li>
+                            @endguest
+
+                            @auth
+                                <li class="scroll-to-section">
+                                   <form action="{{route('logout')}}" method="post">
+                                       @csrf
+                                       <button class="btn btn-danger"> Logout</button>
+                                   </form>
+                                </li> 
+                            @endauth
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>

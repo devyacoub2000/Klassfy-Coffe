@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Notification;
+
 
 class RegisteredUserController extends Controller
 {
@@ -43,8 +45,15 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+        Notification::send($user, new \Illuminate\Auth\Notifications\VerifyEmail);
+
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('front.dashboard', absolute: false));
     }
 }
+
+
+
+
+
